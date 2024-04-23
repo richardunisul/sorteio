@@ -13,16 +13,16 @@ import javax.swing.JOptionPane;
  * @author RIHS
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-    ArrayList<Integer> numeros = new ArrayList();
-    Random aleatorio;
-    int quantidadeFaltante = 0;
-    int ordem = 0;
+    ArrayList<Integer> numeros = new ArrayList(); // Lista de números a serem sorteados simulando o globo de sorteio
+    Random aleatorio;  // para gerar numeros aleatorios
+    int quantidadeFaltante = 0;   // Para Saber quantos números ainda faltam para ser sorteado
+    int ordem = 0;  //ordenação do soreio, meramente para exibir qual a posição foi sorteado, primeiro, segundo, etc...
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
         initComponents();
-        this.b_sortear.setEnabled(false);
+        this.b_sortear.setEnabled(false);  // Desabilita o Botão para evitar que inicie o sorteio sem saber a quantidade de números.
     }
 
     /**
@@ -130,18 +130,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_b_novoActionPerformed
 
     private void b_sortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_sortearActionPerformed
-        if(!numeros.isEmpty()){
-            aleatorio = new Random();
-            int indice = aleatorio.nextInt(quantidadeFaltante);
-            quantidadeFaltante--;
-            ordem++;
-            a_saida.append(ordem+"º sorteado: "+numeros.get(indice).toString()+"\n");
-            l_numerosorteado.setText(numeros.get(indice).toString());
-            numeros.remove(indice);
-        }else{
+        if(!numeros.isEmpty()){  // Se existe números a serem sorteados faça
+            aleatorio = new Random(); //Cria um novo Random
+            int indice = aleatorio.nextInt(quantidadeFaltante); //pega um número aleatório entre 0 e o valor de quantidadeFaltante
+            quantidadeFaltante--; //depois do sorteio retira a quantidade restante em -1
+            ordem++; // indica qual a posição que foi sorteado, primeiro, segundo, etc.
+            a_saida.append(ordem+"º sorteado: "+numeros.get(indice).toString()+"\n"); // Adiciona o numero sorteado no  JTextArea
+            l_numerosorteado.setText(numeros.get(indice).toString()); //Mostra o número sorteado por meio do Label
+            numeros.remove(indice); // Remove o número
+        }else{ //Se acabou os numeros a serem sorteados
             JOptionPane.showMessageDialog(null, "Não Há números a serem sorteados \n inicie um novo Sorteio");
-            this.b_novo.setEnabled(true);
-            this.b_sortear.setEnabled(false);
+            this.b_novo.setEnabled(true);  // habilita o botão novo
+            this.b_sortear.setEnabled(false); // desabilita o botão sortear
         }
     }//GEN-LAST:event_b_sortearActionPerformed
 
